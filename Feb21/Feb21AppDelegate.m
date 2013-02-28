@@ -7,17 +7,25 @@
 //
 
 #import "Feb21AppDelegate.h"
+#import "View.h"
 
 @implementation Feb21AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
+	UIScreen *screen = [UIScreen mainScreen];
+	CGRect applicationFrame = screen.applicationFrame;
+	CGRect bounds = screen.bounds;
+    
+	view = [[View alloc] initWithFrame: applicationFrame];
+	self.window = [[UIWindow alloc] initWithFrame: bounds];
+    
+	//self.window.backgroundColor = [UIColor whiteColor];
+	[self.window addSubview: view];
+	[self.window makeKeyAndVisible];
+	return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -46,4 +54,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    NSLog(@"iPhone touched!");
+    // loop thru all subviews to force refresh
+    for ( int x = 0; x < self.window.subviews.count; ++x ) {
+        [self.window.subviews[x] setNeedsDisplay];
+    }
+}
 @end

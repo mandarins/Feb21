@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface Feb21AppDelegate : UIResponder <UIApplicationDelegate>
-
+@class View;
+@interface Feb21AppDelegate : UIResponder <UIApplicationDelegate> {
+View *view;
+UIWindow *_window;
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 @property (strong, nonatomic) UIWindow *window;
-
 @end
+
